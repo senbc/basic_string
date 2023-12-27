@@ -6,7 +6,7 @@
 
 class string_basic {
 private:
-	char m_string[256];
+	char m_string[256] = {" "};
 public:
 	string_basic() {}
 
