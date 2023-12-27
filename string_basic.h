@@ -4,6 +4,8 @@
 #include <cstring>
 #include <iostream>
 
+constexpr int STRING_BUFFER{256};
+
 class string_basic {
 private:
 	char m_string[256] = {" "};
