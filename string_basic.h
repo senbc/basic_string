@@ -18,13 +18,44 @@ public:
 
 	~string_basic() {}
 
+	string_basic& operator= (const string_basic& string);
+
 	friend std::ostream& operator<<(std::ostream& out, const string_basic& string);
 	friend std::istream& operator>>(std::istream& in, string_basic& string);
 
 	const char* get_string() const {
 		return m_string;
 	}
+
+// ADDITIONAL FEATURES:
+
+	void reverse() {
+		strrev(m_string);
+	}
+
+	void upperCase() {
+		for (size_t i = 0; i < sizeof(m_string) && m_string[i] != '\0'; ++i) {
+			m_string[i] = std::toupper(static_cast<unsigned char>(m_string[i]));
+		}
+	}
+
+	void lowerCase() {
+		for (size_t i = 0; i < sizeof(m_string) && m_string[i] != '\0'; ++i) {
+			m_string[i] = std::tolower(static_cast<unsigned char>(m_string[i]));
+		}
+	}
 };
+
+// overloads
+
+// im thinking about implementing operator+ as concatenation (idk how yet)
+string_basic& string_basic::operator= (const string_basic& string) {
+	if (this != &string) {
+		std::strcpy(m_string, string.m_string);
+	}
+
+	return *this;
+}
 
 std::ostream& operator<<(std::ostream& out, const string_basic& string) {
 	out << string.get_string();
