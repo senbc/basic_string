@@ -16,8 +16,6 @@ public:
 		m_string[sizeof(m_string) - 1] = '\0'; 
 	}
 
-	~string_basic() {}
-
 	string_basic& operator= (const string_basic& string);
 
 	friend std::ostream& operator<<(std::ostream& out, const string_basic& string);
