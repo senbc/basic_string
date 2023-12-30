@@ -16,6 +16,8 @@ public:
 		m_string[sizeof(m_string) - 1] = '\0'; 
 	}
 
+	friend string_basic operator+ (const string_basic& string1, const string_basic& string2);
+
 	string_basic& operator= (const string_basic& string);
 
 	friend std::ostream& operator<<(std::ostream& out, const string_basic& string);
@@ -24,8 +26,6 @@ public:
 	const char* get_string() const {
 		return m_string;
 	}
-
-// ADDITIONAL FEATURES:
 
 	void reverse() {
 		strrev(m_string);
@@ -46,10 +46,20 @@ public:
 
 // overloads
 
-// im thinking about implementing operator+ as concatenation (idk how yet)
+string_basic operator+ (const string_basic & string1, const string_basic& string2) {
+	char result[STRING_BUFFER] = " ";
+
+	strncpy(result, string1.m_string, sizeof(string1.m_string) - 1);
+	result[sizeof(result) - 1] = '\0';
+
+	strcat(result, string2.m_string);
+
+	return result;
+}
+
 string_basic& string_basic::operator= (const string_basic& string) {
 	if (this != &string) {
-		std::strcpy(m_string, string.m_string);
+		strncpy(m_string, string.m_string, sizeof(m_string) - 1);
 	}
 
 	return *this;
